@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "CAAA,AAAA,AAAA,yBAAC,AAAA,EAA2B;EAC1B,MAAM,EAAE,IAAI;CACb",
+    "sources": [
+        "boolean.component.scss"
+    ],
+    "names": [],
+    "file": "boolean.component.css"
+}

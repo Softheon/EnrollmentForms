@@ -1,0 +1,20 @@
+<div provide-parent-form>
+  <div>
+    <mat-form-field>
+      <input id="employerName{{id}}" name="employerName{{id}}" matInput required placeholder="{{ 'enroll-form.employer.name' | translate}}"
+             [(ngModel)]="employer.name" #employerName="ngModel" />
+      <mat-error id="employerNameError{{id}}" *ngIf="employerName?.errors?.required">
+        {{'enroll-form.employer.name' | translate }}
+        {{ 'common.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input id="employerId{{id}}" name="employerId{{id}}" matInput placeholder="{{ 'enroll-form.employer.id' | translate}}" [(ngModel)]="employer.id" />
+    </mat-form-field>
+    <enroll-form-phone-number [phoneNumber]="employer.phone" [required]="false" [showCallingCode]="false"
+                              [placeholder]="'enroll-form.employer.phone'" [id]="id"></enroll-form-phone-number>
+  </div>
+  <div>
+    <enroll-form-address [address]="employer.address" [required]="false" [showCounty]="false" [id]="id"></enroll-form-address>
+  </div>
+</div>

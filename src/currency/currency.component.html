@@ -1,0 +1,7 @@
+<mat-form-field provide-parent-form>
+  <input id="currency{{id}}" name="currency{{id}}" #currency="ngModel" [(ngModel)]="value" matInput placeholder="{{ placeholder | translate}}" [textMask]="{mask: mask}" (change)="onChange($event.target.value)" [required]="required" />
+  <mat-error id="currencyError{{index}}" *ngIf="currency?.errors?.required && currency?.touched">
+    {{placeholder | translate }}
+    {{ 'common.required' | translate}}
+  </mat-error>
+</mat-form-field>

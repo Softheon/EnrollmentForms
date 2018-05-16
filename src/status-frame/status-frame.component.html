@@ -1,0 +1,47 @@
+<div>
+  <mat-card class="status-frame" [ngClass]="pickClass()" [class.no-header]="!showHeader">
+    <div *ngIf="showHeader">
+      <mat-card-title p-h-15 m-b-0 class="status-panel-title" fxLayout="row">
+        <div fxFlex="75%" align-self-center>
+          <span *ngIf="showStatus && valid != null" sws-tooltip-top>
+            <span text-primary *ngIf="!valid">
+              <i class="fas fa-question-circle"></i>
+            </span>
+            <span text-success *ngIf="valid">
+              <i class="fas fa-check-circle"></i>
+            </span>
+            <span sws-tooltip--text>{{(valid ? 'common.complete': 'common.incomplete') | translate}}</span>
+          </span>
+          <span>{{name}}</span>
+        </div>
+
+        <div fxFlex="{{minimizable ? '23%' : '25%'}}">
+          <div fxLayoutAlign="end">
+            <ng-content select="[status-frame-header]"></ng-content>
+          </div>
+        </div>
+        
+        <div fxFlex="2%" *ngIf="minimizable">
+          <div class="minimizeBtn" fxLayoutAlign="end" (click)="toggleMinimized()" text-secondary>
+            <span *ngIf="minimized" sws-tooltip-left>
+              <i class="fas fa-plus-circle"></i>
+              <span sws-tooltip--text>{{'common.show' | translate}}</span>
+            </span>
+            <span *ngIf="!minimized" sws-tooltip-top>
+              <i class="fas fa-minus-circle"></i>
+              <span sws-tooltip--text>{{'common.hide' | translate}}</span>
+            </span>
+          </div>
+
+        </div>
+        
+      </mat-card-title>
+    </div>
+    <mat-card-content class="status-frame-content" [hidden]="minimized" p-h-15 p-t-15 p-b-15>
+      <ng-content></ng-content>
+    </mat-card-content>
+    <mat-card-footer p-t-0 p-b-15 p-h-15 class="status-frame-footer">
+      <ng-content select="[status-frame-footer]"></ng-content>
+    </mat-card-footer>
+  </mat-card>
+</div>

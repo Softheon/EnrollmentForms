@@ -1,0 +1,35 @@
+<div fxLayout="row wrap" fxLayoutGap="5px" provide-parent-form>
+  <mat-form-field *ngIf="showCallingCode" class="calling-code" fxFlex="100%" fxFlex.gt-xs="25%">
+    <input id="callingCode{{id}}" name="callingCode{{id}}" matInput callingCode placeholder="{{'enroll-form.phone-number.callingCode' | translate}}" [matAutocomplete]="auto" [(ngModel)]="phoneNumber.displayName" (ngModelChange)="tdCallingCodes = filterCallingCodes(phoneNumber.displayName);" #callingCodeSelector="ngModel" [required]="required" />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let callingCode of tdCallingCodes" value="{{callingCode.name}}&nbsp;+{{callingCode.callingCode}}">
+        {{callingCode.name}}&nbsp;+{{callingCode.callingCode}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="callingCodeSelector?.errors?.required">
+      {{'enroll-form.phone-number.callingCodeRequired' | translate}}
+    </mat-error>
+    <mat-error *ngIf="callingCodeSelector?.errors?.invalid">
+      {{'enroll-form.phone-number.callingCodeInvalid' | translate}}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="1 1 auto">
+    <input name="phoneNumber{{id}}" id="phoneNumber{{id}}" matInput placeholder="{{placeholder | translate}}" [textMask]="{mask: getPhoneMask()}" [required]="required" [(ngModel)]="phoneNumber.phoneNumber" #phoneSelector="ngModel" [numberOfDigits]="determineDigits()" maxlength="16" />
+    <mat-error *ngIf="phoneSelector?.errors?.required">
+      {{'enroll-form.phone-number.phoneNumberRequired' | translate}}
+    </mat-error>
+    <mat-error *ngIf="phoneSelector?.errors?.invalid">
+      {{'enroll-form.phone-number.phoneNumberInvalid' | translate}}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field *ngIf="showExtensionCode" fxFlex.lt-sm="100%" fxFlex.gt-xs="120px">
+    <input name="extensionCode{{id}}" id="extensionCode{{id}}" matInput placeholder="{{placeholderExt | translate}}" [(ngModel)]="phoneNumber.extensionCode" #extensionCodeSelector="ngModel" [numbersOnly]="true" maxlength="5" />
+  </mat-form-field>
+  <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="120px" *ngIf="showPhoneType">
+    <mat-select id="phoneType{{id}}" name="phoneType{{id}}" placeholder="{{placeholderType | translate}}" [(ngModel)]="phoneNumber.type" [required]="required">
+      <mat-option *ngFor="let type of typeOptions" [value]="type">
+        <span *ngIf="type">{{('enroll-form.phone-number.type.'+type) | translate}}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

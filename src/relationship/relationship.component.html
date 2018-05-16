@@ -1,0 +1,10 @@
+<div provide-parent-form>
+  <mat-form-field *ngIf="!isSpouse">
+    <mat-select id="{{id}}" name="{{id}}" placeholder="{{'enroll-form.relationships.placeholder' | translate}}" [(ngModel)]="relationship"
+      [required]="required" (selectionChange)="onSelectionChange()">
+      <mat-option *ngFor="let relation of dropDownValues" [value]="relation">
+        {{relation | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

@@ -1,0 +1,11 @@
+<div provide-parent-form fxLayout="row wrap">
+  <mat-form-field fxFlex="100%">
+    <input matInput id="ssn{{id}}" name="ssn{{id}}" #ssnModel="ngModel" placeholder="{{'enroll-form.social-security-number.ssn' | translate}}" [(ngModel)]="ssn" [required]="required" [textMask]="{mask: mask}" [numberOfDigits]="9" (change)="onChange($event.target.value)" (keyup)="onChange($event.target.value)" />
+    <mat-error *ngIf="ssnModel?.errors?.required">
+      {{'enroll-form.social-security-number.ssnRequired' | translate}}
+    </mat-error>
+    <mat-error *ngIf="ssnModel?.errors?.invalid">
+      {{'enroll-form.social-security-number.ssnInvalid' | translate}}
+    </mat-error>
+  </mat-form-field>
+</div>

@@ -1,0 +1,36 @@
+<div provide-parent-form>
+  <enroll-form-currency [id]="id" [(value)]="amount.amount"></enroll-form-currency>
+  <enroll-form-currency *ngIf="displayTribalAmount"
+                        [id]="'Tribal'+id" [required]="false" [placeholder]="'enroll-form.amount.tribalAmount'" [(value)]="amount.tribalAmount"></enroll-form-currency>
+  <mat-form-field *ngIf="displayProfitOrLoss">
+    <mat-select placeholder="{{'enroll-form.amount.profitOrLoss' | translate}}" [(ngModel)]="amount.profit" name="amount.profit{{id}}" required>
+      <mat-option [value]="true">
+        {{ 'enroll-form.amount.profit' | translate }}
+      </mat-option>
+      <mat-option [value]="false">
+        {{ 'enroll-form.amount.loss' | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="{{'enroll-form.amount.frequency' | translate}}" [(ngModel)]="amount.frequency" name="amount.frequency{{id}}" (selectionChange)="onFrequencyChange()" required>
+      <mat-option *ngFor="let frequency of frequencies" [value]="frequency">
+        {{ frequency | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="amount.frequency==frequency.HOURLY">
+    <input id="hoursPerWeek{{id}}" name="hoursPerWeek{{id}}" matInput required placeholder="{{ 'enroll-form.amount.frequencies.hoursPerWeek' | translate}}" [(ngModel)]="amount.hoursPerWeek" #hoursPerWeek="ngModel" />
+    <mat-error id="hoursPerWeekError{{id}}" *ngIf="hoursPerWeek?.errors?.required">
+      {{'enroll-form.amount.frequencies.hoursPerWeek' | translate }}
+      {{ 'common.required' | translate}}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field *ngIf="amount.frequency==frequency.DAILY">
+    <input id="daysPerWeek{{id}}" name="daysPerWeek{{id}}" matInput required placeholder="{{ 'enroll-form.amount.frequencies.daysPerWeek' | translate}}" [(ngModel)]="amount.daysPerWeek" #daysPerWeek="ngModel" />
+    <mat-error id="daysPerWeekError{{id}}" *ngIf="daysPerWeek?.errors?.required">
+      {{'enroll-form.amount.frequencies.daysPerWeek' | translate }}
+      {{ 'common.required' | translate}}
+    </mat-error>
+  </mat-form-field>
+</div>

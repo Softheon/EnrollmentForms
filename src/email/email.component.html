@@ -1,0 +1,11 @@
+<div provide-parent-form fxLayout="row wrap">
+  <mat-form-field fxFlex="100%">
+    <input [email]="email !== ''" id="email{{id}}" name="email{{id}}" matInput [(ngModel)]="email" [textMask]="{mask: emailMask}" placeholder="{{'enroll-form.email.email' | translate}}" #emailAddress="ngModel" [required]="required" (change)="onChange($event.target.value)" />
+    <mat-error *ngIf="emailAddress?.errors?.required">
+      {{'enroll-form.email.emailRequired' | translate}}
+    </mat-error>
+    <mat-error *ngIf="emailAddress?.errors?.email">
+      {{'enroll-form.email.emailInvalid' | translate}}
+    </mat-error>
+  </mat-form-field>
+</div>

@@ -1,0 +1,22 @@
+<div provide-parent-form fxLayout="row wrap">
+  <div sws-button-group--primary p-r-10>
+    <input type="radio" id="{{id}}Yes" name="{{id}}" [value]="yesValue" [(ngModel)]="boolean" [required]="required && !unknown" (change)="onChangeEvent(yesValue)" />
+    <label for="{{id}}Yes">{{yesText | translate}}</label>
+    <input type="radio" id="{{id}}No" name="{{id}}" [value]="noValue" [(ngModel)]="boolean" [required]="required && !unknown" (change)="onChangeEvent(noValue)" />
+    <label for="{{id}}No">{{noText | translate}}</label>
+    <input *ngIf="hasUnknown" type="radio" id="{{id}}Unknown" name="{{id}}Unknown" [value]="true" [(ngModel)]="unknown" [required]="required" (change)="onChangeEvent(null)" />
+    <label *ngIf="hasUnknown" for="{{id}}Unknown">{{'common.unknown' | translate}}</label>
+  </div>
+  <div sws-button-group--primary fxFlex.lt-sm="1 1 auto">
+    <span *ngIf="label">
+      {{label | translate}}
+      <span *ngIf="required">*</span>
+    </span>
+    <span *ngIf="tooltip" sws-tooltip-left>
+      <span sws-icon-flat--primary rounded>
+        <i class="fas fa-info"></i>
+      </span>
+      <span sws-tooltip--text>{{tooltip | translate}}</span>
+    </span>
+  </div>
+</div>

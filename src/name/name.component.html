@@ -1,0 +1,27 @@
+<div provide-parent-form>
+  <div fxLayout="row wrap" fxLayoutGap="1%" fxLayoutAlign="start">
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="2 1 auto">
+      <input id="firstName{{id}}" name="firstName{{id}}" matInput placeholder="{{'enroll-form.name.firstName' | translate}}" [required]="required" [(ngModel)]="name.firstName" #firstName="ngModel" />
+      <mat-error id="firstNameError{{id}}" *ngIf="firstName?.errors?.required">
+        {{'enroll-form.name.firstNameRequired' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="1 1 auto" *ngIf="showMiddle">
+      <input id="middleName{{id}}" name="middleName{{id}}" matInput placeholder="{{'enroll-form.name.middleName' | translate}}" [(ngModel)]="name.middleName" #middleName="ngModel" />
+    </mat-form-field>
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="2 1 auto">
+      <input id="lastName{{id}}" name="lastName{{id}}" matInput placeholder="{{'enroll-form.name.lastName' | translate}}" [required]="required" [(ngModel)]="name.lastName" #lastName="ngModel" />
+      <mat-error *ngIf="lastName?.errors?.required">
+        {{'enroll-form.name.lastNameRequired' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex="100px" *ngIf="showSuffix">
+      <mat-select placeholder="{{'enroll-form.name.suffix' | translate}}" [(ngModel)]="name.suffix" name="name.suffix">
+        <mat-option [value]="null"></mat-option>
+        <mat-option *ngFor="let option of suffixOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

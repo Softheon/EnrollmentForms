@@ -1,0 +1,45 @@
+<div provide-parent-form>
+  <div fxLayout="row wrap" fxLayoutGap="1%" fxLayoutAlign="start" *ngIf="!justZip">
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="3 1 auto">
+      <input id="streetName1{{id}}" name="streetName1{{id}}" matInput placeholder="{{'enroll-form.address.streetName1' | translate}}" [required]="required" [(ngModel)]="address.streetName1" #streetName1="ngModel" [readonly]="readonly" />
+      <mat-error id="streetName1Error{{id}}" *ngIf="streetName1?.errors?.required">
+        {{'enroll-form.address.streetName1Required' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="1 1 auto" *ngIf="showStreetName2">
+      <input id="streetName2{{id}}" name="streetName2{{id}}" matInput placeholder="{{'enroll-form.address.streetName2' | translate}}" [(ngModel)]="address.streetName2" #streetName2="ngModel" [readonly]="readonly" />
+    </mat-form-field>
+  </div>
+  <div fxLayout="row wrap" fxLayoutGap="1%" fxLayoutAlign="start">
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="3 1 auto" *ngIf="!justZip">
+      <input id="city{{id}}" name="city{{id}}" matInput placeholder="{{'enroll-form.address.city' | translate}}" [required]="required" [(ngModel)]="address.cityName" #city="ngModel" [readonly]="readonly" />
+      <mat-error id="cityError{{id}}" *ngIf="city?.errors?.required">
+        {{'enroll-form.address.cityRequired' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <div fxFlex.lt-sm="100%" fxFlex.gt-xs="1 1 auto" *ngIf="!justZip">
+      <enroll-form-state [(state)]="address.stateCode" [id]="id" [defaultState]="defaultState" [readonly]="readonly || disableState" [required]="required"></enroll-form-state>
+    </div>
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="3 1 auto">
+      <input id="zipCode{{id}}" name="zipCode{{id}}" matInput placeholder="{{'enroll-form.address.zipCode' | translate}}" [required]="required"
+             [(ngModel)]="address.zipCode" #zipCode="ngModel" [textMask]="{mask: zipCodeMask, guide: false}" maxlength="10"
+             [readonly]="readonly" (keyup)="onZipChange($event)" [numberOfDigitsRange]="zipCodeLengthRange" />
+      <mat-error id="zipCodeError{{id}}" *ngIf="zipCode?.errors?.required">
+        {{'enroll-form.address.zipCodeRequired' | translate}}
+      </mat-error>
+      <mat-error id="zipCodeError{{id}}" *ngIf="zipCode?.errors?.invalid">
+        {{'enroll-form.address.zipCodeLength' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex.lt-sm="100%" fxFlex.gt-xs="3 1 auto" *ngIf="showCounty">
+      <mat-select placeholder="{{'enroll-form.address.county' | translate}}" [(ngModel)]="address.countyName" name="county{{id}}" id="county{{id}}" #state="ngModel" [required]="required" [disabled]="readonly" (selectionChange)="onCountyChange($event)">
+        <mat-option *ngFor="let county of counties" [value]="county.name">
+          {{county.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error id="countyError{{id}}">
+        {{'enroll-form.address.countyRequired' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>

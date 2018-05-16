@@ -1,0 +1,14 @@
+<div provide-parent-form fxLayout="row wrap">
+  <mat-form-field fxFlex="100%" fxFlex.gt-xs="{{width}}">
+    <input id="datePicker{{id}}" name="datePicker{{id}}" #selector="ngModel" matInput [max]="maxDate" [min]="minDate" [matDatepicker]="picker"
+           placeholder="{{placeholder | translate}}" [required]="required" [(ngModel)]="model" (dateChange)="onChange($event?.target?.value)" (change)="onChange($event?.target?.value)" dateValidator />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker [startAt]="startAt"></mat-datepicker>
+    <mat-error *ngIf="selector?.errors?.required && !(selector?.errors?.matDatepickerParse || selector?.errors?.valid || selector?.errors?.matDatepickerMin || selector?.errors?.matDatepickerMax)">
+      {{placeholder | translate}} {{'common.required' | translate}}
+    </mat-error>
+    <mat-error *ngIf="selector?.errors?.matDatepickerParse || selector?.errors?.valid || selector?.errors?.matDatepickerMin || selector?.errors?.matDatepickerMax">
+      {{'common.invalidDate' | translate}}
+    </mat-error>
+  </mat-form-field>
+</div>
