@@ -1,1 +1,1 @@
-export * from "./src/enrollment-forms.module"
+export * from "./src/enroll-form.module"
